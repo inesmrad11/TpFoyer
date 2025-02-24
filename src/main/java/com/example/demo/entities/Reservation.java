@@ -1,9 +1,6 @@
 package com.example.demo.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +8,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -23,4 +21,7 @@ public class Reservation implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date anneeUniversitaire;
     private boolean estValide;
+
+    @ManyToMany
+    Set<Etudiant> etudiants;
 }
