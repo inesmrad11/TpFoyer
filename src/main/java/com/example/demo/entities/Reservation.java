@@ -23,5 +23,5 @@ public class Reservation implements Serializable {
     private boolean estValide;
 
     @ManyToMany
-    Set<Etudiant> etudiants;
+    private Set<Etudiant> etudiants;
 }

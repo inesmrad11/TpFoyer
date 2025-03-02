@@ -1,10 +1,7 @@
 package com.example.demo.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,7 +15,7 @@ import java.util.Set;
 public class Etudiant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idEtudiant;
+    private Long idEtudiant;
     private String nomEt;
     private String prenomEt;
     private long cin;
@@ -27,5 +24,5 @@ public class Etudiant implements Serializable {
     private Date dateNaissance;
 
     @ManyToMany(mappedBy = "etudiants")
-    Set<Reservation> reservations;
+    private Set<Reservation> reservations;
 }
