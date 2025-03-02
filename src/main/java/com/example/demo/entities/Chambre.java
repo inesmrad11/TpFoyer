@@ -17,13 +17,13 @@ import java.util.Set;
 public class Chambre implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idChambre;
+    private Long idChambre;
     private long numeroChambre;
     @Enumerated(EnumType.STRING)
     private TypeChambre typeC;
 
     @ManyToOne
-    Bloc bloc;
+    private Bloc bloc;
     @OneToMany
-    Set<Reservation> reservations;
+    private Set<Reservation> reservations;
 }
