@@ -6,6 +6,7 @@ import com.example.demo.repositories.IReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -26,5 +27,10 @@ public class ReservationService implements IReservationService{
     @Override
     public Reservation retrieveReservation(String idReservation) {
         return reservationRepository.findById(idReservation).orElse(null);
+    }
+
+    @Override
+    public List<Reservation> getReservationParAnneeUniversitaireEtNomUniversite(Date anneeUniversite, String nomUniversite) {
+        return reservationRepository.getReservationParAnneeUniversitaireEtNomUniversite(anneeUniversite, nomUniversite);
     }
 }

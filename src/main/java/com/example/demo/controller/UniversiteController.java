@@ -4,6 +4,7 @@ import com.example.demo.entities.Universite;
 import com.example.demo.services.IUniversiteService;
 //import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +27,13 @@ public class UniversiteController {
     }
 
     @PostMapping("/add-universite")
-    public Universite addUniversite(@RequestBody Universite universite) {
-        return universiteService.addUniversite(universite);
+    public ResponseEntity<?> addUniversite(@RequestBody Universite universite) {
+        try {
+            Universite savedUniversite = universiteService.addUniversite(universite);
+            return ResponseEntity.ok(savedUniversite);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping("/update-universite")

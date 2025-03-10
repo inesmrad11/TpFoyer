@@ -13,13 +13,15 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = "nomUniversite")})
 public class Universite implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUniversite;
+    @Column(unique = true)
     private String nomUniversite;
     private String adresse;
 
-    @OneToOne
+    @OneToOne(mappedBy = "universite", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Foyer foyer;
 }

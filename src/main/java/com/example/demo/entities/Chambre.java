@@ -23,7 +23,10 @@ public class Chambre implements Serializable {
     private TypeChambre typeC;
 
     @ManyToOne
+    @JoinColumn(name = "bloc_id")
     private Bloc bloc;
-    @OneToMany
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "chambre_id")
     private Set<Reservation> reservations;
 }

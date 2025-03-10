@@ -22,6 +22,11 @@ public class Reservation implements Serializable {
     private Date anneeUniversitaire;
     private boolean estValide;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "reservation_etudiant",
+            joinColumns = @JoinColumn(name = "reservation_id"),
+            inverseJoinColumns = @JoinColumn(name = "etudiant_id")
+    )
     private Set<Etudiant> etudiants;
 }

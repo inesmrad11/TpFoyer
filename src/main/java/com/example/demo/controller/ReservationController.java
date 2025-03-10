@@ -5,6 +5,7 @@ import com.example.demo.services.IReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -27,5 +28,13 @@ public class ReservationController {
     @PutMapping("/update-reservation")
     public Reservation updateReservation(Reservation res){
         return reservationService.updateReservation(res);
+    }
+
+    @GetMapping("/by-annee-universite")
+    public List<Reservation> getReservationParAnneeUniversitaireEtNomUniversite(
+            @RequestParam Date anneeUniversite,
+            @RequestParam String nomUniversite
+    ) {
+        return reservationService.getReservationParAnneeUniversitaireEtNomUniversite(anneeUniversite, nomUniversite);
     }
 }
