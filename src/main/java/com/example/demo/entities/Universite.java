@@ -22,6 +22,15 @@ public class Universite implements Serializable {
     private String nomUniversite;
     private String adresse;
 
-    @OneToOne(mappedBy = "universite", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne
+    @JoinColumn(name = "foyer_id")
     private Foyer foyer;
+
+    public Foyer getFoyer() {
+        return foyer;
+    }
+
+    public void setFoyer(Foyer foyer) {
+        this.foyer = foyer;
+    }
 }

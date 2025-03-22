@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IChambreRepository extends JpaRepository<Chambre, Long> {
@@ -31,4 +32,13 @@ public interface IChambreRepository extends JpaRepository<Chambre, Long> {
 
     //Solution 2: Using Spring Data JPA Keywords
     List<Chambre> findByBlocIdBlocAndTypeC(long idBloc, TypeChambre typeC);
+    @Query("SELECT c FROM Chambre c WHERE c.numeroChambre IN :numeroChambres")
+    List<Chambre> findChambresByNumeroChambre(@Param("numeroChambres") List<Long> numeroChambres);
+    List<Chambre> findByBlocIdBloc(long idBloc);
+    @Query("SELECT c FROM Chambre c " +
+            "JOIN c.bloc b " +
+            "JOIN b.foyer f " +
+            "JOIN f.universite u " +
+            "WHERE u.nomUniversite = :nomUniversite")
+    List<Chambre> findChambresByNomUniversite(@Param("nomUniversite") String nomUniversite);
 }

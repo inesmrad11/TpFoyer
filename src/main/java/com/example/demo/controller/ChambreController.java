@@ -5,6 +5,7 @@ import com.example.demo.entities.TypeChambre;
 import com.example.demo.services.IChambreService;
 //import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,5 +52,11 @@ public class ChambreController {
     @GetMapping("/by-bloc-and-type-keywords")
     public List<Chambre> getChambresParBlocEtTypeKeywords(@RequestParam long idBloc, @RequestParam TypeChambre typeC) {
         return chambreService.findByBlocIdBlocAndTypeC(idBloc, typeC);
+    }
+
+    @GetMapping("/by-universite")
+    public ResponseEntity<List<Chambre>> getChambresParNomUniversite(@RequestParam String nomUniversite) {
+        List<Chambre> chambres = chambreService.getChambresParNomUniversite(nomUniversite);
+        return ResponseEntity.ok(chambres);
     }
 }

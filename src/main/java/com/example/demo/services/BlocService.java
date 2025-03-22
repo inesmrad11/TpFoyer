@@ -1,8 +1,10 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.Bloc;
+import com.example.demo.entities.Chambre;
 import com.example.demo.repositories.IBlocRepository;
 //import lombok.AllArgsConstructor;
+import com.example.demo.repositories.IChambreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
 public class BlocService implements IBlocService{
     @Autowired
     IBlocRepository blocRepository;
+    IChambreRepository chambreRepository;
 
     @Override
     public List<Bloc> retrieveBlocs() {
@@ -37,5 +40,17 @@ public class BlocService implements IBlocService{
     @Override
     public void removeBloc(long idBloc) {
         blocRepository.deleteById(idBloc);
+    }
+
+    @Override
+    public Bloc affecterChambresABloc(List<Long> numChambre, long idBloc) {
+        Bloc bloc = blocRepository.findById(idBloc).orElseThrow(() -> new RuntimeException("Bloc not found with ID: " + idBloc));
+        List<Chambre> chambres = chambreRepository.findChambresByNumeroChambre(numChambre);
+        for (Chambre chambre : chambres) {
+            chambre.setBloc(bloc);
+        }
+        chambreRepository.saveAll(chambres);
+        bloc.getChambres().addAll(chambres);
+        return blocRepository.save(bloc);
     }
 }

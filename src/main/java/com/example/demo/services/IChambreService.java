@@ -18,4 +18,5 @@ public interface IChambreService {
     List<Chambre> getChambresParBlocEtType(long idBloc, TypeChambre typeC) ;
     // Solution 2: Using Spring Data JPA Keywords
     List<Chambre> findByBlocIdBlocAndTypeC (long idBloc, TypeChambre typeC) ;
+    List<Chambre> getChambresParNomUniversite(String nomUniversite);
 }

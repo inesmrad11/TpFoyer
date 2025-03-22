@@ -50,4 +50,9 @@ public class ChambreService implements IChambreService{
     public List<Chambre> findByBlocIdBlocAndTypeC(long idBloc, TypeChambre typeC) {
         return chambreRepository.findByBlocIdBlocAndTypeC(idBloc, typeC);
     }
+
+    @Override
+    public List<Chambre> getChambresParNomUniversite(String nomUniversite) {
+        return chambreRepository.findChambresByNomUniversite(nomUniversite);
+    }
 }

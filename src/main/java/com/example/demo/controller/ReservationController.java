@@ -31,10 +31,11 @@ public class ReservationController {
     }
 
     @GetMapping("/by-annee-universite")
-    public List<Reservation> getReservationParAnneeUniversitaireEtNomUniversite(
-            @RequestParam Date anneeUniversite,
-            @RequestParam String nomUniversite
-    ) {
+    public List<Reservation> getReservationParAnneeUniversitaireEtNomUniversite(@RequestParam Date anneeUniversite, @RequestParam String nomUniversite) {
         return reservationService.getReservationParAnneeUniversitaireEtNomUniversite(anneeUniversite, nomUniversite);
+    }
+    @PostMapping("/ajouter")
+    public Reservation ajouterReservation(@RequestParam long idChambre, @RequestParam long cinEtudiant) {
+        return reservationService.ajouterReservation(idChambre, cinEtudiant);
     }
 }

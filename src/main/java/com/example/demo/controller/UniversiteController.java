@@ -40,4 +40,14 @@ public class UniversiteController {
     public Universite updateUniversite(@RequestBody Universite universite) {
         return universiteService.updateUniversite(universite);
     }
+
+    @PutMapping("/affecter-foyer/{idFoyer}/{nomUniversite}")
+    public Universite affecterFoyerAUniversite(@PathVariable long idFoyer, @PathVariable String nomUniversite) {
+        return universiteService.affecterFoyerAUniversite(idFoyer, nomUniversite);
+    }
+
+    @PostMapping("/desaffecter/{idUniversite}")
+    public Universite desaffecterFoyerAUniversite(@PathVariable long idUniversite) {
+        return universiteService.desaffecterFoyerAUniversite(idUniversite);
+    }
 }
