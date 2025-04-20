@@ -15,6 +15,7 @@ import java.util.List;
 public class UniversiteService implements IUniversiteService{
     @Autowired
     IUniversiteRepository universiteRepository;
+    @Autowired
     IFoyerRepository foyerRepository;
     @Override
     public List<Universite> retrieveAllUniversities() {
@@ -38,17 +39,26 @@ public class UniversiteService implements IUniversiteService{
 
     @Override
     public Universite affecterFoyerAUniversite(long idFoyer, String nomUniversite) {
-        Foyer foyer = foyerRepository.findById(idFoyer).orElseThrow(() -> new RuntimeException("Foyer not found with ID: " + idFoyer));
+
+        Foyer foyer = foyerRepository.findById(idFoyer)
+                .orElseThrow(() -> new RuntimeException("Foyer not found with ID: " + idFoyer));
+
         Universite universite = universiteRepository.findUniversiteByNomUniversite(nomUniversite);
+
+
         if (universite == null) {
-            throw new RuntimeException("Universite not found with name: " + nomUniversite);
+            throw new RuntimeException("Université not found with name: " + nomUniversite);
         }
+
         universite.setFoyer(foyer);
+
         foyer.setUniversite(universite);
+
         universiteRepository.save(universite);
-        foyerRepository.save(foyer);
+
         return universite;
     }
+
 
     @Override
     public Universite desaffecterFoyerAUniversite(long idUniversite) {

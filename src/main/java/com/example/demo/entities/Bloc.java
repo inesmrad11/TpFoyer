@@ -27,7 +27,6 @@ public class Bloc implements Serializable {
     private Foyer foyer;
 
     @OneToMany(mappedBy = "bloc", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
     private Set<Chambre> chambres;
 
     public Long getIdBloc() {

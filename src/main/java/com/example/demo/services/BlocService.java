@@ -15,6 +15,7 @@ import java.util.List;
 public class BlocService implements IBlocService{
     @Autowired
     IBlocRepository blocRepository;
+    @Autowired
     IChambreRepository chambreRepository;
 
     @Override

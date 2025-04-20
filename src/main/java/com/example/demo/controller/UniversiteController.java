@@ -27,14 +27,11 @@ public class UniversiteController {
     }
 
     @PostMapping("/add-universite")
-    public ResponseEntity<?> addUniversite(@RequestBody Universite universite) {
-        try {
-            Universite savedUniversite = universiteService.addUniversite(universite);
-            return ResponseEntity.ok(savedUniversite);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<Universite> addUniversite(@RequestBody Universite universite) {
+        Universite savedUniversite = universiteService.addUniversite(universite);
+        return ResponseEntity.ok(savedUniversite);
     }
+
 
     @PutMapping("/update-universite")
     public Universite updateUniversite(@RequestBody Universite universite) {

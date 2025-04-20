@@ -44,6 +44,7 @@ public class ReservationService implements IReservationService{
     }
     @Override
     public Reservation ajouterReservation(long idBloc, long cinEtudiant) {
+
         List<Chambre> chambres = chambreRepository.findByBlocIdBloc(idBloc);
 
         Chambre chambreDisponible = chambres.stream()
@@ -54,23 +55,21 @@ public class ReservationService implements IReservationService{
         Etudiant etudiant = etudiantRepository.findByCin(cinEtudiant)
                 .orElseThrow(() -> new RuntimeException("Étudiant non trouvé avec le CIN : " + cinEtudiant));
 
-        String numReservation = chambreDisponible.getNumeroChambre() + "-" + chambreDisponible.getBloc().getNomBloc() + "-" + new Date().getYear();
-
         Reservation reservation = new Reservation();
-        reservation.setIdReservation(numReservation);
+        reservation.setIdReservation(chambreDisponible.getNumeroChambre() + "-" + new Date().getYear());
         reservation.setAnneeUniversitaire(new Date());
         reservation.setEstValide(true);
 
         reservation.getEtudiants().add(etudiant);
-
         chambreDisponible.getReservations().add(reservation);
 
         chambreRepository.save(chambreDisponible);
 
-        return reservation;
+        return reservationRepository.save(reservation);
     }
 
-    // Helper method to get capacity based on Chambre type
+
+
     private int getCapacityForType(TypeChambre type) {
         switch (type) {
             case SIMPLE:

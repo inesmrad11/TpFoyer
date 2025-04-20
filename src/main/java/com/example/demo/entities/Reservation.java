@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,11 +9,12 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-//@Getter
-//@Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Reservation implements Serializable {
@@ -28,7 +30,9 @@ public class Reservation implements Serializable {
             joinColumns = @JoinColumn(name = "reservation_id"),
             inverseJoinColumns = @JoinColumn(name = "etudiant_id")
     )
-    private Set<Etudiant> etudiants;
+
+    private Set<Etudiant> etudiants = new HashSet<>();
+
 
     public Set<Etudiant> getEtudiants() {
         return etudiants;

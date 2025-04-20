@@ -43,15 +43,21 @@ public class FoyerService implements IFoyerService{
         foyerRepository.deleteById(idFoyer);
     }
 
+    @Override
     public Foyer ajouterFoyerEtAffecterAUniversite(Foyer foyer, long idUniversite) {
-        Universite universite = universiteRepository.findById(idUniversite).orElseThrow(() -> new RuntimeException("Universite not found with ID: " + idUniversite));
+        Universite universite = universiteRepository.findById(idUniversite)
+                .orElse(null);
+
         foyer.setUniversite(universite);
-        for (Bloc bloc : foyer.getBlocs()) {
-            bloc.setFoyer(foyer);
+
+        if (foyer.getBlocs() != null) {
+            for (Bloc bloc : foyer.getBlocs()) {
+                bloc.setFoyer(foyer);
+            }
         }
+
         Foyer savedFoyer = foyerRepository.save(foyer);
-        universite.setFoyer(savedFoyer);
-        universiteRepository.save(universite);
+
         return savedFoyer;
     }
 }
