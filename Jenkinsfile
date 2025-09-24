@@ -17,7 +17,7 @@ pipeline {
     stages {
         stage('Code Checkout') {
             steps {
-                git branch: 'master',
+                git branch: 'services-avances-validation',
                     url: 'https://github.com/inesmrad11/TpFoyer.git'
             }
         }
